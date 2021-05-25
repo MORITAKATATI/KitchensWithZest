@@ -171,10 +171,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GalleriesController.cs" />
+    <Compile Include="Controllers\GalleryPhotosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\MessageBoxesController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
+    <Compile Include="Controllers\ProductPhotosController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,7 +189,7 @@
     <Compile Include="Models\Copy\GalleryCopy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Message.cs">
+    <Compile Include="Models\MessageBox.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
@@ -212,6 +214,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Copy\ProductCopy.cs" />
+    <Compile Include="Models\ViewModels\GalleryView.cs" />
+    <Compile Include="Models\ViewModels\ProductView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -292,7 +296,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
@@ -302,16 +305,28 @@
     <Content Include="Views\Galleries\Details.cshtml" />
     <Content Include="Views\Galleries\Edit.cshtml" />
     <Content Include="Views\Galleries\Index.cshtml" />
-    <Content Include="Views\Messages\Create.cshtml" />
-    <Content Include="Views\Messages\Delete.cshtml" />
-    <Content Include="Views\Messages\Details.cshtml" />
-    <Content Include="Views\Messages\Edit.cshtml" />
-    <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Photos\Create.cshtml" />
     <Content Include="Views\Photos\Delete.cshtml" />
     <Content Include="Views\Photos\Details.cshtml" />
     <Content Include="Views\Photos\Edit.cshtml" />
     <Content Include="Views\Photos\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Home\ProductDetails.cshtml" />
+    <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Home\GalleryDetails.cshtml" />
+    <Content Include="Views\Home\GetStart.cshtml" />
+    <Content Include="Views\ProductPhotos\Create.cshtml" />
+    <Content Include="Views\ProductPhotos\Delete.cshtml" />
+    <Content Include="Views\ProductPhotos\Edit.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\GalleryPhotos\Create.cshtml" />
+    <Content Include="Views\GalleryPhotos\Delete.cshtml" />
+    <Content Include="Views\GalleryPhotos\Edit.cshtml" />
+    <Content Include="Views\MessageBoxes\Create.cshtml" />
+    <Content Include="Views\MessageBoxes\Delete.cshtml" />
+    <Content Include="Views\MessageBoxes\Details.cshtml" />
+    <Content Include="Views\MessageBoxes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

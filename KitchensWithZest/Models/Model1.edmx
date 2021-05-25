@@ -15,7 +15,7 @@
           <Property Name="MainPhotoPath" Type="varchar(max)" />
           <Property Name="ImagesPath" Type="varchar(max)" />
         </EntityType>
-        <EntityType Name="Message">
+        <EntityType Name="MessageBox">
           <Key>
             <PropertyRef Name="MessageId" />
           </Key>
@@ -25,8 +25,8 @@
           <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="255" />
           <Property Name="Subject" Type="nvarchar" MaxLength="50" />
-          <Property Name="Message" Type="text" />
-          <Property Name="SubmissionTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Content" Type="text" />
+          <Property Name="SubmissionTime" Type="datetime" StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Photo">
           <Key>
@@ -73,7 +73,7 @@
         </Association>
         <EntityContainer Name="KitchensWithZestModelStoreContainer">
           <EntitySet Name="Gallery" EntityType="Self.Gallery" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageBox" EntityType="Self.MessageBox" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Photo_Gallery" Association="Self.FK_Photo_Gallery">
@@ -99,19 +99,6 @@
           <Property Name="MainPhotoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ImagesPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Photos" Relationship="Self.FK_Photo_Gallery" FromRole="Gallery" ToRole="Photo" />
-        </EntityType>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="MessageId" />
-          </Key>
-          <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="SubmissionTime" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="Photo">
           <Key>
@@ -161,7 +148,6 @@
         </Association>
         <EntityContainer Name="KitchensWithZestEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Galleries" EntityType="Self.Gallery" />
-          <EntitySet Name="Messages" EntityType="Self.Message" />
           <EntitySet Name="Photos" EntityType="Self.Photo" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <AssociationSet Name="FK_Photo_Gallery" Association="Self.FK_Photo_Gallery">
@@ -172,7 +158,21 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Photo" EntitySet="Photos" />
           </AssociationSet>
+          <EntitySet Name="MessageBoxes" EntityType="KitchensWithZestModel.MessageBox" />
         </EntityContainer>
+        <EntityType Name="MessageBox">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SubmissionTime" Type="DateTime" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -187,20 +187,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="MainPhotoPath" ColumnName="MainPhotoPath" />
                 <ScalarProperty Name="ImagesPath" ColumnName="ImagesPath" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Messages">
-            <EntityTypeMapping TypeName="KitchensWithZestModel.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Subject" ColumnName="Subject" />
-                <ScalarProperty Name="Content" ColumnName="Message" />
-                <ScalarProperty Name="SubmissionTime" ColumnName="SubmissionTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -222,6 +208,20 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="MainPhotoPath" ColumnName="MainPhotoPath" />
                 <ScalarProperty Name="ImagesPath" ColumnName="ImagesPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageBoxes">
+            <EntityTypeMapping TypeName="KitchensWithZestModel.MessageBox">
+              <MappingFragment StoreEntitySet="MessageBox">
+                <ScalarProperty Name="SubmissionTime" ColumnName="SubmissionTime" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

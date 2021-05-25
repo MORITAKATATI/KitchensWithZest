@@ -23,7 +23,7 @@ namespace KitchensWithZest.Models
         [DisplayName("Photo")]
         public string PhotoPath { get; set; }
         [NotMapped]
-        public IEnumerable<HttpPostedFileBase> PhotoFiles { get; set; }
+        public IEnumerable<HttpPostedFileBase> PhotoFile { get; set; }
 
         public virtual Gallery Gallery { get; set; }
         public virtual Product Product { get; set; }

@@ -23,7 +23,7 @@ namespace KitchensWithZest.Models
         {
             this.Photos = new HashSet<Photo>();
         }
-    
+
         public int GalleryId { get; set; }
         [Required]
         public string Title { get; set; }

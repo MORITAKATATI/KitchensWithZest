@@ -19,7 +19,7 @@ namespace KitchensWithZest.Controllers
         public ActionResult Index()
         {
             var photos = db.Photos.Include(p => p.Gallery).Include(p => p.Product);
-            return View(photos.ToList());
+            return View(photos.OrderByDescending(p=>p.PhotoId).ToList());
         }
 
         // GET: Photos/Details/5
@@ -40,8 +40,8 @@ namespace KitchensWithZest.Controllers
         // GET: Photos/Create
         public ActionResult Create()
         {
-            ViewBag.GalleryId = new SelectList(db.Galleries, "GalleryId", "Title");
-            ViewBag.ProductId = new SelectList(db.Products, "ProductId", "Title");
+            ViewBag.Gallery = new SelectList(db.Galleries, "GalleryId", "Title");
+            ViewBag.Product = new SelectList(db.Products, "ProductId", "Title");
             return View();
         }
 
@@ -50,31 +50,25 @@ namespace KitchensWithZest.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "PhotoId,ProductId,GalleryId,PhotoPath")]*/ Photo photo, IEnumerable<HttpPostedFileBase> photos)
+        public ActionResult Create(/*[Bind(Include = "PhotoId,ProductId,GalleryId,PhotoPath")]*/ Photo photo, IEnumerable<HttpPostedFileBase> PhotoFile)
         {
             if (ModelState.IsValid)
             {
-                //if (photos != null)
-                //{
-                    var photoList = new List<Photo>();
-                    foreach (var file in photo.PhotoFiles)
+                foreach (var file in photo.PhotoFile)
+                {
+                    if (file.ContentLength > 0)
                     {
-                        if (file.ContentLength > 0)
-                        {
-                            string filename = Path.GetFileNameWithoutExtension(file.FileName)
-                                + DateTime.Now.ToString("yymmssfff")
-                                + Path.GetExtension(file.FileName);
-                            photo.PhotoPath = "~/Images/Photos/" + filename;
-                            filename = Path.Combine(Server.MapPath("~/Images/Photos/"), filename);
-                            file.SaveAs(filename);
-                            var pho = new Photo();
-                            photoList.Add(pho);
-                        }
+                        string filename = Path.GetFileNameWithoutExtension(file.FileName)
+                            + DateTime.Now.ToString("yymmssfff")
+                            + Path.GetExtension(file.FileName);
+                        photo.PhotoPath = "~/Images/Photos/" + filename;
+                        filename = Path.Combine(Server.MapPath("~/Images/Photos/"), filename);
+                        file.SaveAs(filename);
+                            
+                        db.Photos.Add(photo);
+                        db.SaveChanges();
                     }
-
-                //}
-                db.Photos.Add(photo);
-                db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 
@@ -105,10 +99,16 @@ namespace KitchensWithZest.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PhotoId,ProductId,GalleryId,PhotoPath")] Photo photo)
+        public ActionResult Edit(int PhotoId, Photo photo, HttpPostedFileBase PhotoFiles)
         {
             if (ModelState.IsValid)
             {
+                string filename = Path.GetFileNameWithoutExtension(PhotoFiles.FileName)
+                    + DateTime.Now.ToString("yymmssfff")
+                    + Path.GetExtension(PhotoFiles.FileName);
+                photo.PhotoPath = "~/Images/Photos/" + filename;
+                PhotoFiles.SaveAs(Path.Combine(Server.MapPath("~/Images/Photos/"), filename));
+
                 db.Entry(photo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
