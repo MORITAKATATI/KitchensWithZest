@@ -84,17 +84,24 @@ namespace KitchensWithZest.Controllers
         }
 
 
-        // POST: Messages/Create
+        // POST: Home/Contact
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Contact([Bind(Include = "MessageId,FirstName,LastName,Phone,Email,Subject,Content,SubmissionTime")] MessageBox messageBox)
+        public ActionResult Contact(MessageBox messageBox)
         {
+
             if (ModelState.IsValid)
             {
+
+                //KitchensWithZestEntities db = new KitchensWithZestEntities();
+                messageBox.SubmissionTime = DateTime.Now;
                 db.MessageBoxes.Add(messageBox);
                 db.SaveChanges();
+
+                //Send success acknoledgement to view
+                TempData["SuccessMsg"] = "Your messsage has been successfully sent, thank you.";
                 return RedirectToAction("Contact");
             }
 

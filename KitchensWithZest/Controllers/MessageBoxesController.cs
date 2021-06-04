@@ -35,67 +35,7 @@ namespace KitchensWithZest.Controllers
             return View(messageBox);
         }
 
-        // GET: MessageBoxes/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: MessageBoxes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(/*[Bind(Include = "MessageId,FirstName,LastName,Phone,Email,Subject,Content,SubmissionTime")] */MessageBox messageBox)
-        {
-            //if (messageBox != null)
-            //{
-            //    messageBox.SubmissionTime = DateTime.Now;
-            //}
-            if (ModelState.IsValid)
-            {
-                
-                DateTime dateTime = DateTime.Now;
-                messageBox.SubmissionTime = dateTime;
-                db.MessageBoxes.Add(messageBox);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(messageBox);
-        }
-
-
-        // GET: MessageBoxes/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MessageBox messageBox = db.MessageBoxes.Find(id);
-            if (messageBox == null)
-            {
-                return HttpNotFound();
-            }
-            return View(messageBox);
-        }
-
-        // POST: MessageBoxes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MessageId,FirstName,LastName,Phone,Email,Subject,Content,SubmissionTime")] MessageBox messageBox)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(messageBox).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(messageBox);
-        }
 
         // GET: MessageBoxes/Delete/5
         public ActionResult Delete(int? id)

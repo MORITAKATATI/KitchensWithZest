@@ -182,11 +182,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Copy\PhotoCopy.cs" />
     <Compile Include="Models\Gallery.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Copy\GalleryCopy.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MessageBox.cs">
@@ -213,7 +211,6 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Copy\ProductCopy.cs" />
     <Compile Include="Models\ViewModels\GalleryView.cs" />
     <Compile Include="Models\ViewModels\ProductView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -323,7 +320,6 @@
     <Content Include="Views\GalleryPhotos\Create.cshtml" />
     <Content Include="Views\GalleryPhotos\Delete.cshtml" />
     <Content Include="Views\GalleryPhotos\Edit.cshtml" />
-    <Content Include="Views\MessageBoxes\Create.cshtml" />
     <Content Include="Views\MessageBoxes\Delete.cshtml" />
     <Content Include="Views\MessageBoxes\Details.cshtml" />
     <Content Include="Views\MessageBoxes\Index.cshtml" />
