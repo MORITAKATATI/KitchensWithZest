@@ -26,8 +26,8 @@ namespace KitchensWithZest.Models
         }
     
         public virtual DbSet<Gallery> Galleries { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<MessageBox> MessageBoxes { get; set; }
     }
 }

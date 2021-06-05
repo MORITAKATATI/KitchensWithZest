@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\2193094\OneDrive - Whitireia and WelTec\IT7501\Programme\KitchensWithZest\KitchensWithZest\Models\Model1.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\mori0\OneDrive - Whitireia and WelTec\IT7501\Programme\KitchensWithZest\KitchensWithZest\Models\Model1.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
